@@ -2,16 +2,11 @@ import fetch from 'node-fetch';
 
 class Viacep {
 
-    search(cep, callback, errorcallback)
+    async search(cep, callback, errorcallback)
     {
-        fetch('https://viacep.com.br/ws/'+cep+'/json')
-        .then(res => res.json())
-        .then(data => {
-            callback(data);
-        })
-        .catch(err=> {
-            errorcallback(err);
-        });
+        const resp = await fetch('https://viacep.com.br/ws/'+cep+'/json');
+        const json = await resp.json();   
+        await callback(json);
     }
 
 }

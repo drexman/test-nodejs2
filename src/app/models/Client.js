@@ -5,11 +5,19 @@ export default class Client extends Sequelize.Model {
             {
                 name: Sequelize.STRING,
                 cep: Sequelize.STRING,
-                cpf: Sequelize.STRING
+                cpf: Sequelize.STRING,
+                createdAt:{
+                    field: 'created_at', 
+                    type:Sequelize.DATE
+                },
+                updatedAt:{
+                    field: 'updated_at',
+                    type: Sequelize.DATE
+                }
             },
             {
-                timestamp: true,
-                sequelize
+                timestamps: true,
+                sequelize: sequelize
             }
         )   
         return this;

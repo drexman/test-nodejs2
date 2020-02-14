@@ -14,7 +14,8 @@ export default class Address extends Sequelize.Model {
                 cep: Sequelize.STRING,
             },
             {
-                sequelize
+                timestamps: false,
+                sequelize: sequelize
             }
         )
         return this

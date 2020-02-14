@@ -6,7 +6,7 @@
   "type": "module",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "dev": "npm-run-all -p dev:*",
+    
     "start": "nodemon src/server.js",
     "queue": "nodemon src/queue.js"
   },

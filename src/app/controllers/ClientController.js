@@ -59,7 +59,7 @@ class ClientController {
                     status: 'processing'
                 });
 
-                const final_result = [];
+                var list = [];
                 fs.createReadStream("uploads/" + filename)
                 .pipe(csv())
                 .on("data", (el) => {
@@ -69,10 +69,24 @@ class ClientController {
                         cpf : el.CPF,
                         user_id : user.id
                    };
+                   list.push(client);
+                   
+                }).on("end", () => {
 
-                    Queue.add({client});
-                }).on("end", () => {});
-
+                    if(list.length)
+                    {
+                        const count = list.length;
+                        FileProcess.update({count_pending: count}, {where:{id:file.id}}).then(()=>{
+                            for(var i = 0; i < count; i++)
+                            {
+                                var client = list[i];
+                                client.user_id = user.id;
+                                Queue.add({client});
+                            }
+                        }); 
+                    }
+                });
+            
                 const uploadResponse = {
 
                     "user_code": user.code,
@@ -99,7 +113,6 @@ class ClientController {
 
     async update(req, res, next)
     {
-        
         
         const updateClientschema = yup.object().shape({
             id: yup.string().required(),
@@ -139,7 +152,7 @@ class ClientController {
 
             return res.status(200).json({
                 status: 'success',
-                message: 'Client updated successfully',
+                message: 'Cliente atualizado com sucesso',
                 data: updatedClient
             });
             

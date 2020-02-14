@@ -5,11 +5,19 @@ export default class User extends Sequelize.Model {
         super.init(
             {
                 name: Sequelize.STRING,
-                code: Sequelize.STRING
+                code: Sequelize.STRING,
+                createdAt:{
+                    field: 'created_at', 
+                    type:Sequelize.DATE
+                },
+                updatedAt:{
+                    field: 'updated_at',
+                    type: Sequelize.DATE
+                }
             },
             {
-                timestamp: true,
-                sequelize
+                timestamps: true,
+                sequelize: sequelize
             }
         )
         

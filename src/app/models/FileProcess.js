@@ -6,12 +6,19 @@ export default class FileProcess extends Sequelize.Model {
         super.init(
             {
                 file_name: Sequelize.STRING,
+                count_pending: Sequelize.INTEGER,
                 status: Sequelize.ENUM('completed', 'processing'),
             },
             {
-                sequelize
+                tableName: 'File_processes',
+                timestamps: false,
+                sequelize:sequelize
             }
         )
+
+        this.addHook('beforeCreate', async (user) => {
+            user.id = await uuid()
+        })
    
         return this;
     }
