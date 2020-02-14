@@ -16,6 +16,7 @@ export default class User extends Sequelize.Model {
                 }
             },
             {
+                tableName: 'Users',
                 timestamps: true,
                 sequelize: sequelize
             }

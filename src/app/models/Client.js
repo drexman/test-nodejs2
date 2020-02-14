@@ -16,6 +16,7 @@ export default class Client extends Sequelize.Model {
                 }
             },
             {
+                tableName: 'Clients',
                 timestamps: true,
                 sequelize: sequelize
             }
