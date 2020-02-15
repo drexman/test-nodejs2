@@ -8,8 +8,6 @@ class Viacep {
         const json = await resp.json();   
         await callback(json);
     }
-
 }
-
 
 export default new Viacep();

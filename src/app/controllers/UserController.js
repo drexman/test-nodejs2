@@ -13,7 +13,7 @@ class UserController {
 
         if(!user)
         {
-            return res.status(404).json({ status: false, message: `Usuario não encontrado`, data: []});
+            return res.status(400).json({ status: false, message: `Usuario não encontrado`, data: []});
         }
 
         const file = await FileProcess.findOne({ where: {user_id: user.id}});

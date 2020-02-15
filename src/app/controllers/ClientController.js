@@ -19,9 +19,9 @@ class ClientController {
             const { originalname, mimetype, filename } = file;
 
             if(mimetype !== 'text/csv'){
-                return res.status(404).json({
+                return res.status(400).json({
                     status: "error",
-                    message: 'Aequivo com extensão inválido'
+                    message: 'Arquivo com extensão inválido'
                 })
             }
 
@@ -30,7 +30,7 @@ class ClientController {
 
             if(username == undefined || normalizedCode == undefined)
             {
-                return res.status(404).json({ status: "error", message : `Nome arquivo com formato inválido '${originalname}'. Favor mudar formato do arquivo pata`})  
+                return res.status(400).json({ status: "error", message : `Nome arquivo com formato inválido '${originalname}'. Favor mudar formato do arquivo pata`})  
             }
             try {
                 
@@ -88,7 +88,6 @@ class ClientController {
                 });
             
                 const uploadResponse = {
-
                     "user_code": user.code,
                     "name": user.name,
                     "created_at": user.create_at,
@@ -101,13 +100,12 @@ class ClientController {
                 return res.status(200).json(uploadResponse); 
 
             } catch (error) {
-                return res.status(404).json({status: "error", message : error.message});
+                return res.status(400).json({status: "error", message : error.message});
             }
-
         }
         else 
         {
-            return res.status(404).json({ status: "error", message: 'Upload não realizado'});
+            return res.status(400).json({ status: "error", message: 'Upload não realizado'});
         }
     }
 
@@ -157,7 +155,7 @@ class ClientController {
             });
             
         } catch (error) {
-            return res.status(404).json({message : error.message});
+            return res.status(400).json({message : error.message});
         }
     } 
 
